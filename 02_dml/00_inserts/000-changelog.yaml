@@ -1,1 +1,17 @@
-databaseChangeLog: []
+databaseChangeLog : 
+  - changeSet:
+      id: 01-inserts-roles
+      author: mrtinez.stiven@gmail.com
+      context: dev
+      labels: HU-02-dev
+      comment: inserts for roles table
+      changes:
+        - tagDatabase:
+            tag: v1.0.1
+        - sqlFile:
+            path: 02_dml/00_inserts/001-inserts-roles.sql
+            endDelimiter: ";"
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: 05_rollback/01_dml/00_inserts/001-inserts-roles.sql
