@@ -1,0 +1,6 @@
+# Requires a local Liquibase installation with the PostgreSQL JDBC driver available.
+changeLogFile=changelog-master.yaml
+url=jdbc:postgresql://localhost:5433/lavarapido_db
+username=lavarapido_user
+password=lavarapido_password
+driver=org.postgresql.Driver
