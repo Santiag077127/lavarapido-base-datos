@@ -15,3 +15,35 @@ databaseChangeLog :
       rollback:
         - sqlFile:
             path: 05_rollback/01_dml/00_inserts/001-inserts-roles.sql
+  - changeSet:
+      id: 02-inserts-admin
+      author: mrtinez.stiven@gmail.com
+      context: dev
+      labels: HU-03-dev
+      comment: inserts for admin 
+      changes:
+        - tagDatabase:
+            tag: v1.0.1
+        - sqlFile:
+            path: 02_dml/00_inserts/002-inserts-admin.sql
+            endDelimiter: ";"
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: 05_rollback/02_dml/00_inserts/002-inserts-admin.sql
+  - changeSet:
+      id: 03-inserts-marcas
+      author: santiagogordo
+      context: dev
+      labels: HU-06-dev
+      comment: inserts for marcas table 
+      changes:
+        - tagDatabase:
+            tag: v1.0.1
+        - sqlFile:
+            path: 02_dml/00_inserts/003-inserts-marcas.sql
+            endDelimiter: ";"
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: 05_rollback/02_dml/00_inserts/003-inserts-marcas.sql
