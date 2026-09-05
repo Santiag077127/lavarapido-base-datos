@@ -1,12 +1,11 @@
-
 ALTER TABLE reservas
 ALTER COLUMN estado TYPE VARCHAR(20);
 
 ALTER TABLE reservas
-DROP CONSTRAINT IF EXISTS reservas_estado_check;
+DROP CONSTRAINT IF EXISTS chk_reservas_estado;
 
 ALTER TABLE reservas
-ADD CONSTRAINT reservas_estado_check
+ADD CONSTRAINT chk_reservas_estado
 CHECK (
     estado IN (
         'PENDIENTE',
