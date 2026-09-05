@@ -95,3 +95,19 @@ databaseChangeLog :
       rollback:
         - sqlFile:
             path: 05_rollback/02_dml/00_inserts/006-inserts-vehiculos.sql
+  - changeSet:
+      id: 07-inserts-Servicios
+      author: stiven.martinez 
+      context: dev
+      labels: HU-11-dev
+      comment: inserts for vehiculos table 
+      changes:
+        - tagDatabase:
+            tag: v1.0.1
+        - sqlFile:
+            path: 02_dml/00_inserts/007-inserts-servicios.sql
+            endDelimiter: ";"
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: 05_rollback/02_dml/00_inserts/007-inserts-servicios.sql
