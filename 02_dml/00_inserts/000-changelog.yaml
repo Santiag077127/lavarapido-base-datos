@@ -47,3 +47,51 @@ databaseChangeLog :
       rollback:
         - sqlFile:
             path: 05_rollback/02_dml/00_inserts/003-inserts-marcas.sql
+  - changeSet:
+      id: 04-inserts-usuarios
+      author: santiagogordo 
+      context: dev
+      labels: HU-10-dev
+      comment: inserts for usuarios table 
+      changes:
+        - tagDatabase:
+            tag: v1.0.1
+        - sqlFile:
+            path: 02_dml/00_inserts/004-inserts-usuarios.sql
+            endDelimiter: ";"
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: 05_rollback/02_dml/00_inserts/004-inserts-usuarios.sql
+  - changeSet:
+      id: 05-inserts-user_roles
+      author: santiagogordo 
+      context: dev
+      labels: HU-10-dev
+      comment: inserts for user_roles table 
+      changes:
+        - tagDatabase:
+            tag: v1.0.1
+        - sqlFile:
+            path: 02_dml/00_inserts/005-inserts-user_role.sql
+            endDelimiter: ";"
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: 05_rollback/02_dml/00_inserts/005-inserts-user_role.sql
+  - changeSet:
+      id: 06-inserts-vehiculos
+      author: stiven.martinez 
+      context: dev
+      labels: HU-10-dev
+      comment: inserts for vehiculos table 
+      changes:
+        - tagDatabase:
+            tag: v1.0.1
+        - sqlFile:
+            path: 02_dml/00_inserts/006-inserts-vehiculos.sql
+            endDelimiter: ";"
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: 05_rollback/02_dml/00_inserts/006-inserts-vehiculos.sql
