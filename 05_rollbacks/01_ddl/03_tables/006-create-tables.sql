@@ -1,0 +1,2 @@
+DROP TABLE IF EXISTS asignaciones;
+DROP TABLE IF EXISTS operadores;
