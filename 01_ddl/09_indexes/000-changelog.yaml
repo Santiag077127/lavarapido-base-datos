@@ -1,1 +1,17 @@
-databaseChangeLog: []
+databaseChangeLog : 
+  - changeSet:
+      id: 01_create-indexes-pagos
+      author: Stiven Perdomo
+      context: dev
+      labels: HU-16-dev
+      comment: creation of indexes for table pagos
+      changes:
+        - tagDatabase:
+            tag: v1.0.2
+        - sqlFile:
+            path: 01_ddl/09_indexes/001-create-index-pagos.sql
+            endDelimiter: ";"
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: 05_rollback/01_ddl/09_indexes/001-create-index-pagos.sql
