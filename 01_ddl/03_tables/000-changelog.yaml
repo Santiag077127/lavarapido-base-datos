@@ -14,7 +14,7 @@ databaseChangeLog :
             stripComments: false
       rollback:
         - sqlFile:
-            path: 05_rollback/01_ddl/03_tables/001-create-tables.sql
+            path: 05_rollbacks/01_ddl/03_tables/001-create-tables.sql
 
   - changeSet:
       id: 02_create-tables
@@ -31,7 +31,7 @@ databaseChangeLog :
             stripComments: false
       rollback:
         - sqlFile:
-            path: 05_rollback/01_ddl/03_tables/002-create-tables.sql
+            path: 05_rollbacks/01_ddl/03_tables/002-create-tables.sql
 
   - changeSet:
       id: 03_create-table-reserevas
@@ -48,7 +48,7 @@ databaseChangeLog :
             stripComments: false
       rollback:
         - sqlFile:
-            path: 05_rollback/01_ddl/03_tables/003-create-tables.sql
+            path: 05_rollbacks/01_ddl/03_tables/003-create-tables.sql
 
   - changeSet:
       id: 04_create-table-pagos
@@ -65,7 +65,7 @@ databaseChangeLog :
             stripComments: false
       rollback:
         - sqlFile:
-            path: 05_rollback/01_ddl/03_tables/004-create-tables.sql
+            path: 05_rollbacks/01_ddl/03_tables/004-create-tables.sql
             
   - changeSet:
       id: 05_create-table-calificaciones
@@ -82,7 +82,7 @@ databaseChangeLog :
             stripComments: false
       rollback:
         - sqlFile:
-            path: 05_rollback/01_ddl/03_tables/005-create-tables.sql
+            path: 05_rollbacks/01_ddl/03_tables/005-create-tables.sql
 
   - changeSet:
       id: 05_create-table-calificaciones
@@ -99,7 +99,7 @@ databaseChangeLog :
             stripComments: false
       rollback:
         - sqlFile:
-            path: 05_rollback/01_ddl/03_tables/006-create-tables.sql
+            path: 05_rollbacks/01_ddl/03_tables/006-create-tables.sql
   - changeSet:
       id: 07_create-table-pagos
       author: Santiago Gordo
@@ -115,4 +115,4 @@ databaseChangeLog :
             stripComments: false
       rollback:
         - sqlFile:
-            path: 05_rollback/01_ddl/03_tables/007-create-tables.sql
+            path: 05_rollbacks/01_ddl/03_tables/007-create-tables.sql

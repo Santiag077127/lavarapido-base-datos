@@ -41,7 +41,7 @@ Al ejecutar todos los changesets activos se cargan:
 - Dos usuarios administradores de desarrollo y su asignación de rol.
 - Marcas de vehículos frecuentes en Colombia.
 
-Estos registros son datos de desarrollo. Antes de desplegar a producción, revise las cuentas y credenciales incluidas en los scripts de inserción.
+El changelog histórico `changelog-master.yaml` conserva las dos identidades propietarias y sus UUID, pero sus hashes fijos no deben usarse para instalaciones nuevas ni como credenciales de producción. Para una instalación nueva use `changelog-production.yaml`: crea el esquema y los roles base, sin cuentas ni datos ficticios. Después aprovisione **solo** los perfiles de los dos dueños con UUID verificados y contraseñas nuevas mediante `OwnerProvisioningTool` del backend. Para una base ya existente, compare primero `DATABASECHANGELOG` y checksums, aplique únicamente migraciones incrementales y rote las credenciales; nunca reescriba el SQL histórico aplicado. El procedimiento completo está en `C:\Frontend-lavarapido\PLAN_PRIMERA_PRUEBA_RENDER.md`.
 
 ## Estructura del repositorio
 
