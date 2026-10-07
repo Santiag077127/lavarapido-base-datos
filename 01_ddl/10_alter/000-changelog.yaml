@@ -14,4 +14,16 @@ databaseChangeLog :
             stripComments: false
       rollback:
         - sqlFile:
-            path: 05_rollback/01_ddl/10_alter/001-alter-reservas.sql
+            path: 05_rollbacks/01_ddl/10_alter/001-alter-reservas.sql
+  - changeSet:
+      id: 20261006-reservas-precio-y-solapamiento
+      author: mrtinez.stiven@gmail.com
+      comment: Snapshot of agreed price/duration, valid default, and exclusion of overlapping bookings.
+      changes:
+        - sqlFile:
+            path: 01_ddl/10_alter/002-reservas-precio-y-solapamiento.sql
+            endDelimiter: ";"
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: 05_rollbacks/01_ddl/10_alter/002-reservas-precio-y-solapamiento.sql

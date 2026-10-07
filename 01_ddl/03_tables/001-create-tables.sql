@@ -52,8 +52,6 @@ CREATE TABLE user_roles (
         )
 );
 
-
-
 CREATE TABLE tokens_recuperacion (
     id_token         UUID          PRIMARY KEY, -- Generado por el Backend
     fk_id_usuario    UUID          NOT NULL,
@@ -69,5 +67,3 @@ CREATE TABLE tokens_recuperacion (
     CONSTRAINT chk_token_expiracion
         CHECK (expiracion_at > created_at)
 );
-
-

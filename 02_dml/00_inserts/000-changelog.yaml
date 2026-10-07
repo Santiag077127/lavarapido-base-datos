@@ -14,7 +14,7 @@ databaseChangeLog :
             stripComments: false
       rollback:
         - sqlFile:
-            path: 05_rollback/01_dml/00_inserts/001-inserts-roles.sql
+            path: 05_rollbacks/02_dml/00_inserts/001-inserts-roles.sql
   - changeSet:
       id: 02-inserts-admin
       author: mrtinez.stiven@gmail.com
@@ -30,7 +30,7 @@ databaseChangeLog :
             stripComments: false
       rollback:
         - sqlFile:
-            path: 05_rollback/02_dml/00_inserts/002-inserts-admin.sql
+            path: 05_rollbacks/02_dml/00_inserts/002-inserts-admin.sql
   - changeSet:
       id: 03-inserts-marcas
       author: santiagogordo
@@ -46,7 +46,7 @@ databaseChangeLog :
             stripComments: false
       rollback:
         - sqlFile:
-            path: 05_rollback/02_dml/00_inserts/003-inserts-marcas.sql
+            path: 05_rollbacks/02_dml/00_inserts/003-inserts-marcas.sql
   - changeSet:
       id: 04-inserts-usuarios
       author: santiagogordo 
@@ -62,7 +62,7 @@ databaseChangeLog :
             stripComments: false
       rollback:
         - sqlFile:
-            path: 05_rollback/02_dml/00_inserts/004-inserts-usuarios.sql
+            path: 05_rollbacks/02_dml/00_inserts/004-inserts-usuarios.sql
   - changeSet:
       id: 05-inserts-user_roles
       author: santiagogordo 
@@ -78,7 +78,7 @@ databaseChangeLog :
             stripComments: false
       rollback:
         - sqlFile:
-            path: 05_rollback/02_dml/00_inserts/005-inserts-user_role.sql
+            path: 05_rollbacks/02_dml/00_inserts/005-inserts-user_role.sql
   - changeSet:
       id: 06-inserts-vehiculos
       author: stiven.martinez 
@@ -94,7 +94,7 @@ databaseChangeLog :
             stripComments: false
       rollback:
         - sqlFile:
-            path: 05_rollback/02_dml/00_inserts/006-inserts-vehiculos.sql
+            path: 05_rollbacks/02_dml/00_inserts/006-inserts-vehiculos.sql
   - changeSet:
       id: 07-inserts-Servicios
       author: stiven.martinez 
@@ -110,4 +110,4 @@ databaseChangeLog :
             stripComments: false
       rollback:
         - sqlFile:
-            path: 05_rollback/02_dml/00_inserts/007-inserts-servicios.sql
+            path: 05_rollbacks/02_dml/00_inserts/007-inserts-servicios.sql

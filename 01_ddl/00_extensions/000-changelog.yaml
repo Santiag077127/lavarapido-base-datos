@@ -14,5 +14,5 @@ databaseChangeLog :
             stripComments: false
       rollback:
         - sqlFile:
-            path: 05_rollback/01_ddl/00_extensions/001-create-uuid-extension.sql
+            path: 05_rollbacks/01_ddl/00_extensions/001-create-uuid-extension.sql
   
