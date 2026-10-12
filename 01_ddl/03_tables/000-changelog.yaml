@@ -120,7 +120,6 @@ databaseChangeLog :
   - changeSet:
       id: 08_notificaciones
       author: Santiago Gordo
-      context: dev
       labels: HU-19-dev
       comment: Personal history, devices, and persistent notification delivery.
       changes:
@@ -131,3 +130,31 @@ databaseChangeLog :
       rollback:
         - sqlFile:
             path: 05_rollbacks/01_ddl/03_tables/008-notificaciones.sql
+
+  - changeSet:
+      id: 09 notificaciones
+      author: Stiven Perdomo
+      labels: HU-19-dev
+      comment: Personal history, devices, and persistent notification delivery.
+      changes:
+        - sqlFile:
+            path: 01_ddl/03_tables/009-dispositivos_push.sql
+            endDelimiter: ";"
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: 05_rollbacks/01_ddl/03_tables/009-dispositivos_push.sql
+
+  - changeSet:
+      id: 10 notificaciones
+      author: Santiago Gordo
+      labels: HU-19-dev
+      comment: Personal history, devices, and persistent notification delivery.
+      changes:
+        - sqlFile:
+            path: 01_ddl/03_tables/010-notificacion_entregas.sql
+            endDelimiter: ";"
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: 05_rollbacks/01_ddl/03_tables/010-notificacion_entregas.sql
