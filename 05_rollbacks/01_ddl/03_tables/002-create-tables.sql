@@ -1,0 +1,5 @@
+DROP TABLE IF EXISTS servicios;
+
+DROP TABLE IF EXISTS marcas; 
+
+DROP TABLE IF EXISTS vehiculos;
