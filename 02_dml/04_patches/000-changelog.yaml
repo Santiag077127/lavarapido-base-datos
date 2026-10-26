@@ -1,1 +1,21 @@
-databaseChangeLog: []
+databaseChangeLog:
+  - changeSet:
+      id: 20261006-roles-base
+      author: mrtinez.stiven@gmail.com
+      comment: Ensure the three application roles exist without creating users.
+      changes:
+        - sqlFile:
+            path: 02_dml/04_patches/000-roles-base.sql
+            endDelimiter: ";"
+      rollback:
+        - sqlFile:
+            path: 05_rollbacks/02_dml/04_patches/000-roles-base.sql
+  - changeSet:
+      id: 20261006-conciliar-pago-intentos
+      author: mrtinez.stiven@gmail.com
+      comment: Reconcile historical payments after the Liquibase-owned attempt table already exists.
+      changes:
+        - sqlFile:
+            path: 02_dml/04_patches/001-conciliar-pago-intentos.sql
+            splitStatements: false
+            stripComments: false
