@@ -17,15 +17,13 @@ El maestro contiene changesets históricos etiquetados con el contexto `dev`, in
 
 ## Desarrollo local con Docker Compose
 
-Ejecute estos comandos desde la raíz de este repositorio, en PowerShell. La configuración local predeterminada crea la base `lavarapido_db`, usuario `lavarapido_user`, contraseña `lavarapido_password` y publica PostgreSQL en el puerto `5433` del equipo.
-
-1. Revise `.env.example` y cree su archivo local ignorado por Git:
+Ejecute estos comandos desde la raíz de este repositorio, en PowerShell. El nombre de base, usuario y puerto se leen de `.env`; PostgreSQL se publica solo en `127.0.0.1`. `.env.example` contiene valores de referencia editables, sin credenciales.
+1. Copie `.env.example` a `.env` (ignorado por Git) y edite `.env` localmente para definir una contraseña única y fuerte. Genérela con un gestor de contraseñas; no la escriba en comandos, scripts ni archivos versionados. No reutilice credenciales de QA o producción:
 
    ```powershell
    if (-not (Test-Path .env)) { Copy-Item .env.example .env } else { Write-Host ".env ya existe; se conserva sin cambios." }
    ```
-
-   Variables disponibles: `POSTGRES_DB`, `POSTGRES_USER`, `POSTGRES_PASSWORD` y `POSTGRES_PORT`. Puede cambiar los valores locales en `.env`; la URL equivalente desde el equipo host es `jdbc:postgresql://localhost:<POSTGRES_PORT>/<POSTGRES_DB>`.
+   Variables disponibles: `POSTGRES_DB`, `POSTGRES_USER`, `POSTGRES_PASSWORD` y `POSTGRES_PORT`. `POSTGRES_PASSWORD` es obligatoria. Compose la entrega a PostgreSQL y Liquibase desde el entorno; Liquibase no la recibe como argumento de línea de comandos. La URL desde el equipo host es `jdbc:postgresql://localhost:<POSTGRES_PORT>/<POSTGRES_DB>`.
 
 2. Inicie únicamente PostgreSQL:
 
@@ -58,25 +56,15 @@ Ejecute estos comandos desde la raíz de este repositorio, en PowerShell. La con
 5. Compruebe la conexión PostgreSQL desde el contenedor:
 
    ```powershell
-   docker compose -p lavarapido-base-datos exec postgres pg_isready -U lavarapido_user -d lavarapido_db
+   docker compose -p lavarapido-base-datos exec postgres sh -c 'pg_isready -U "$POSTGRES_USER" -d "$POSTGRES_DB"'
    ```
 
-   Si cambió usuario o base en `.env`, reemplace los valores del comando. Para consultar los logs del servicio, use `docker compose -p lavarapido-base-datos logs postgres`.
+El comando usa el usuario y la base configurados para el contenedor. Para consultar los logs del servicio, use `docker compose -p lavarapido-base-datos logs postgres`.
 
 ## Conexión e inicio del backend
+El backend está en `C:\backend\backend-vehicular`. Configure `DB_PASSWORD` con el mismo valor local que `POSTGRES_PASSWORD` usando el gestor de secretos o la configuración privada de ejecución de su IDE. Spring Boot no consume automáticamente el `.env` de este repositorio. No incluya la contraseña en comandos, scripts, archivos versionados ni logs compartidos.
 
-El backend está en `C:\backend\backend-vehicular`. Para ejecutarlo desde el equipo host, su configuración base usa `DB_HOST=localhost`, `DB_PORT=5433`, `DB_NAME=lavarapido_db` y `DB_USERNAME=lavarapido_user`; configure `DB_PASSWORD` con el mismo valor que `POSTGRES_PASSWORD` de la base local. Spring Boot no consume automáticamente el archivo `.env` de este repositorio: configure las variables en el entorno de ejecución o en la configuración local de su IDE.
-
-Ejemplo de variables para la sesión actual de PowerShell (ajuste la contraseña si cambió `.env`):
-
-```powershell
-$env:DB_HOST = "localhost"
-$env:DB_PORT = "5433"
-$env:DB_NAME = "lavarapido_db"
-$env:DB_USERNAME = "lavarapido_user"
-$env:DB_PASSWORD = "<la contraseña local configurada>"
-```
-
+Configure las variables no secretas del backend en el entorno de ejecución o IDE. Configure `DB_PASSWORD` mediante su almacenamiento privado de secretos; no use una asignación literal de contraseña en el historial de PowerShell.
 Desde `C:\backend\backend-vehicular`, inicie el backend con su Maven Wrapper:
 
 ```powershell
@@ -96,7 +84,7 @@ Los archivos versionados no describen una secuencia de migración aprobada para 
 ## Seguridad y operación
 
 - `.env` contiene configuración local y no debe publicarse ni compartirse. El repositorio lo excluye de Git.
-- Las credenciales predeterminadas de `.env.example` son solo para desarrollo local; nunca son credenciales de QA o producción.
+- `.env.example` no incluye una contraseña predeterminada. Defina una contraseña local única en `.env`; nunca use credenciales de QA o producción en desarrollo.
 - No aplique seeds de desarrollo a bases reales. Los changesets de desarrollo incluyen perfiles y asignaciones administrativas históricos.
 - No edite changesets que ya se hayan aplicado en un ambiente compartido: cree cambios incrementales y preserve los checksums históricos.
 - No borre volúmenes ni reinicialice bases existentes como procedimiento de instalación.
