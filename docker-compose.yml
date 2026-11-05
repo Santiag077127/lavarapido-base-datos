@@ -6,9 +6,9 @@ services:
     environment:
       POSTGRES_DB: ${POSTGRES_DB:-lavarapido_db}
       POSTGRES_USER: ${POSTGRES_USER:-lavarapido_user}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-lavarapido_password}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Define POSTGRES_PASSWORD en el archivo .env local ignorado por Git}
     ports:
-      - "${POSTGRES_PORT:-5433}:5432"
+      - "127.0.0.1:${POSTGRES_PORT:-5433}:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
@@ -39,7 +39,8 @@ services:
       - --classpath=/liquibase/liquibase_libs/postgresql-42.7.8.jar
       - --url=jdbc:postgresql://postgres:5432/${POSTGRES_DB:-lavarapido_db}
       - --username=${POSTGRES_USER:-lavarapido_user}
-      - --password=${POSTGRES_PASSWORD:-lavarapido_password}
+    environment:
+      LIQUIBASE_COMMAND_PASSWORD: ${POSTGRES_PASSWORD:?Define POSTGRES_PASSWORD en el archivo .env local ignorado por Git}
     command: update
 
 volumes:
