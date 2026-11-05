@@ -17,7 +17,7 @@ El maestro contiene changesets históricos etiquetados con el contexto `dev`, in
 
 ## Desarrollo local con Docker Compose
 
-Ejecute estos comandos desde la raíz de este repositorio, en PowerShell. La configuración local crea la base `lavarapido_db` y el usuario `lavarapido_user`; PostgreSQL se publica solo en `127.0.0.1`, puerto `5433` por defecto. La contraseña es obligatoria y no tiene valor predeterminado.
+Ejecute estos comandos desde la raíz de este repositorio, en PowerShell. El nombre de base, usuario y puerto se leen de `.env`; PostgreSQL se publica solo en `127.0.0.1`. `.env.example` contiene valores de referencia editables, sin credenciales.
 1. Copie `.env.example` a `.env` (ignorado por Git) y edite `.env` localmente para definir una contraseña única y fuerte. Genérela con un gestor de contraseñas; no la escriba en comandos, scripts ni archivos versionados. No reutilice credenciales de QA o producción:
 
    ```powershell
@@ -56,10 +56,10 @@ Ejecute estos comandos desde la raíz de este repositorio, en PowerShell. La con
 5. Compruebe la conexión PostgreSQL desde el contenedor:
 
    ```powershell
-   docker compose -p lavarapido-base-datos exec postgres pg_isready -U lavarapido_user -d lavarapido_db
+   docker compose -p lavarapido-base-datos exec postgres sh -c 'pg_isready -U "$POSTGRES_USER" -d "$POSTGRES_DB"'
    ```
 
-   Si cambió usuario o base en `.env`, reemplace los valores del comando. Para consultar los logs del servicio, use `docker compose -p lavarapido-base-datos logs postgres`.
+El comando usa el usuario y la base configurados para el contenedor. Para consultar los logs del servicio, use `docker compose -p lavarapido-base-datos logs postgres`.
 
 ## Conexión e inicio del backend
 El backend está en `C:\backend\backend-vehicular`. Configure `DB_PASSWORD` con el mismo valor local que `POSTGRES_PASSWORD` usando el gestor de secretos o la configuración privada de ejecución de su IDE. Spring Boot no consume automáticamente el `.env` de este repositorio. No incluya la contraseña en comandos, scripts, archivos versionados ni logs compartidos.
