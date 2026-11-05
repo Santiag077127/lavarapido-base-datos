@@ -1,6 +1,3 @@
-# Requires a local Liquibase installation with the PostgreSQL JDBC driver available.
+# Docker Compose is the documented local Liquibase entry point and loads .env.
+# Do not store local connection settings or credentials in this file.
 changeLogFile=changelog-master.yaml
-url=jdbc:postgresql://localhost:5433/lavarapido_db
-username=lavarapido_user
-password=lavarapido_password
-driver=org.postgresql.Driver
